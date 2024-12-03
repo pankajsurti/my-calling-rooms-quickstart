@@ -73,7 +73,7 @@ subscribeToCall = (call) => {
         console.log(`*** Call Id: ${call.id}`);
         //Subscribe to call's 'idChanged' event for value changes.
         call.on('idChanged', () => {
-            console.log(`Call Id changed: ${call.id}`); 
+            console.log(`*** Call Id changed: ${call.id}`); 
         });
 
         // Inspect the initial call.state value.
@@ -115,7 +115,8 @@ subscribeToCall = (call) => {
                removeLocalVideoStream();
             });
         });
-        
+        console.log(`*** Call isMuted: ${call.isMuted}`);
+        console.log(`*** Call call.remoteParticipants: ${call.remoteParticipants.length}`);
         // Inspect the call's current remote participants and subscribe to them.
         call.remoteParticipants.forEach(remoteParticipant => {
             subscribeToRemoteParticipant(remoteParticipant);
