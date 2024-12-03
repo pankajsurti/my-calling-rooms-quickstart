@@ -70,14 +70,14 @@ startCallButton.onclick = async () => {
 subscribeToCall = (call) => {
     try {
         // Inspect the initial call.id value.
-        console.log(`Call Id: ${call.id}`);
+        console.log(`*** Call Id: ${call.id}`);
         //Subscribe to call's 'idChanged' event for value changes.
         call.on('idChanged', () => {
             console.log(`Call Id changed: ${call.id}`); 
         });
 
         // Inspect the initial call.state value.
-        console.log(`Call state: ${call.state}`);
+        console.log(`*** Call state: ${call.state}`);
         // Subscribe to call's 'stateChanged' event for value changes.
         call.on('stateChanged', async () => {
             console.log(`Call state changed: ${call.state}`);
@@ -144,10 +144,10 @@ subscribeToCall = (call) => {
 subscribeToRemoteParticipant = (remoteParticipant) => {
     try {
         // Inspect the initial remoteParticipant.state value.
-        console.log(`Remote participant state: ${remoteParticipant.state}`);
+        console.log(`*** Remote participant state: ${remoteParticipant.state}`);
         // Subscribe to remoteParticipant's 'stateChanged' event for value changes.
         remoteParticipant.on('stateChanged', () => {
-            console.log(`Remote participant state changed: ${remoteParticipant.state}`);
+            console.log(`*** Remote participant state changed: ${remoteParticipant.state}`);
         });
 
         // Inspect the remoteParticipants's current videoStreams and subscribe to them.
@@ -163,7 +163,7 @@ subscribeToRemoteParticipant = (remoteParticipant) => {
             });
             // Unsubscribe from remote participant's video streams that were removed.
             e.removed.forEach(remoteVideoStream => {
-                console.log('Remote participant video stream was removed.');
+                console.log('*** Remote participant video stream was removed.');
             })
         });
     } catch (error) {
