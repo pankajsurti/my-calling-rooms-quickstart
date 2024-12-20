@@ -80,7 +80,7 @@ subscribeToCall = (call) => {
         console.log(`*** Call state: ${call.state}`);
         // Subscribe to call's 'stateChanged' event for value changes.
         call.on('stateChanged', async () => {
-            console.log(`Call state changed: ${call.state}`);
+            console.log(`***Call state changed: ${call.state}`);
             if(call.state === 'Connected') {
                 connectedLabel.hidden = false;
                 startCallButton.disabled = true;
@@ -95,13 +95,16 @@ subscribeToCall = (call) => {
                 startVideoButton.disabled = true;
                 stopVideoButton.disabled = true;
                 remoteVideosGallery.hidden = true;
-                console.log(`Call ended, call end reason={code=${call.callEndReason.code}, subCode=${call.callEndReason.subCode}}`);
+                console.log(`***Call ended, call end reason={code=${call.callEndReason.code}, subCode=${call.callEndReason.subCode}}`);
             }   
         });
-        call.on('isLocalVideoStartedChanged', () => {
-            console.log(`isLocalVideoStarted changed: ${call.isLocalVideoStarted}`);
+        call.on('roleChanged', () => {
+            console.log(`***roleChanged changed: ${call.role}`);
         });
-        console.log(`isLocalVideoStarted: ${call.isLocalVideoStarted}`);
+        call.on('isLocalVideoStartedChanged', () => {
+            console.log(`***isLocalVideoStarted changed: ${call.isLocalVideoStarted}`);
+        });
+        console.log(`***isLocalVideoStarted: ${call.isLocalVideoStarted}`);
         call.localVideoStreams.forEach(async (lvs) => {
             localVideoStream = lvs;
             await displayLocalVideoStream();
