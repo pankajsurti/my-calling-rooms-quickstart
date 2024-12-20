@@ -118,6 +118,12 @@ subscribeToCall = (call) => {
                removeLocalVideoStream();
             });
         });
+        call.on('totalParticipantCountChanged', () => {
+            console.log(`***totalParticipantCountChanged event: ${call.totalParticipantCount}`);
+        });
+        call.on('mutedByOthers', () => {
+            mconsole.log(`***mutedByOthers event: You have been muted by other participant in this call`);
+        });
         console.log(`*** Call isMuted: ${call.isMuted}`);
         console.log(`*** Call call.remoteParticipants: ${call.remoteParticipants.length}`);
         // Inspect the call's current remote participants and subscribe to them.
@@ -152,6 +158,10 @@ subscribeToRemoteParticipant = (remoteParticipant) => {
         // Subscribe to remoteParticipant's 'stateChanged' event for value changes.
         remoteParticipant.on('stateChanged', () => {
             console.log(`*** Remote participant state changed: ${remoteParticipant.state}`);
+        });
+
+        remoteParticipant.on('roleChanged', () => {
+            console.log(`***remoteParticipant roleChanged changed: ${call.role}`);
         });
 
         // Inspect the remoteParticipants's current videoStreams and subscribe to them.
