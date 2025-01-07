@@ -132,11 +132,11 @@ subscribeToCall = (call) => {
 
         call.on('totalParticipantCountChanged', () => {
             console.log(`***totalParticipantCountChanged event: ${call.totalParticipantCount}`);
-            console.log(`***call.remoteParticipants: ${call.remoteParticipants}`);
+            console.log(`***call.remoteParticipants: ${call.remoteParticipants.length}`);
 
             call.remoteParticipants.forEach(remoteParticipant => {
                 console.log(`***inside forEach loop (totalParticipantCountChanged) to call subscribeToRemoteParticipant for each participant.`);
-                subscribeToRemoteParticipant(remoteParticipant);
+                //subscribeToRemoteParticipant(remoteParticipant);
             });
 
         });
@@ -224,11 +224,8 @@ subscribeToRemoteVideoStream = async (remoteVideoStream) => {
         // Attach the renderer view to the UI.
         remoteVideoContainer.appendChild(view.target);
         // Append the remote video container to the remote videos gallery.
-        if (!remoteVideosGallery.hasChildNodes())
-        {
-            console.log(`***remoteVideosGallery.appendChild(remoteVideoContainer); is CALLED inside subscribeToRemoteVideoStream`);
-            remoteVideosGallery.appendChild(remoteVideoContainer);
-        }
+        console.log(`***remoteVideosGallery.appendChild(remoteVideoContainer); is CALLED inside subscribeToRemoteVideoStream`);
+        remoteVideosGallery.appendChild(remoteVideoContainer);
     }
 
     // Remote participant has switched video on/off
