@@ -95,12 +95,7 @@ subscribeToCall = (call) => {
                 console.log(`***Call ended, call end reason={code=${call.callEndReason.code}, subCode=${call.callEndReason.subCode}}`);
             }   
         });
-        call.on('roleChanged', () => {
-            console.log(`***roleChanged changed: ${call.role}`);
-        });
-        call.on('isLocalVideoStartedChanged', () => {
-            console.log(`***isLocalVideoStarted changed: ${call.isLocalVideoStarted}`);
-        });
+
         call.localVideoStreams.forEach(async (lvs) => {
             localVideoStream = lvs;
             await displayLocalVideoStream();
@@ -114,30 +109,60 @@ subscribeToCall = (call) => {
                removeLocalVideoStream();
             });
         });
-        call.on('totalParticipantCountChanged', () => {
-            console.log(`***totalParticipantCountChanged event: ${call.totalParticipantCount}`);
-        });
-        call.on('mutedByOthers', () => {
-            mconsole.log(`***mutedByOthers event: You have been muted by other participant in this call`);
-        });
-        console.log(`*** Call isMuted: ${call.isMuted}`);
-        console.log(`*** Call call.remoteParticipants: ${call.remoteParticipants.length}`);
+
         // Inspect the call's current remote participants and subscribe to them.
         call.remoteParticipants.forEach(remoteParticipant => {
+            console.log(`***inside forEach loop to call subscribeToRemoteParticipant for each participant.`);
             subscribeToRemoteParticipant(remoteParticipant);
         });
         // Subscribe to the call's 'remoteParticipantsUpdated' event to be
         // notified when new participants are added to the call or removed from the call.
         call.on('remoteParticipantsUpdated', e => {
+            console.log(`***remoteParticipantsUpdated event fired.`);
             // Subscribe to new remote participants that are added to the call.
             e.added.forEach(remoteParticipant => {
+                console.log('***Remote participant added from the call.');
                 subscribeToRemoteParticipant(remoteParticipant)
             });
             // Unsubscribe from participants that are removed from the call
             e.removed.forEach(remoteParticipant => {
-                console.log('Remote participant removed from the call.');
+                console.log('***Remote participant removed from the call.');
             });
         });
+
+        call.on('totalParticipantCountChanged', () => {
+            console.log(`***totalParticipantCountChanged event: ${call.totalParticipantCount}`);
+
+            call.remoteParticipants.forEach(remoteParticipant => {
+                console.log(`***inside forEach loop (totalParticipantCountChanged) to call subscribeToRemoteParticipant for each participant.`);
+                subscribeToRemoteParticipant(remoteParticipant);
+            });
+
+        });
+        call.on('remoteAudioStreamsUpdated', () => {
+            console.log(`***remoteAudioStreamsUpdated event fired.`);
+        });
+        call.on('remoteAudioStreamsUpdated', () => {
+            console.log(`***remoteAudioStreamsUpdated event fired.`);
+        });
+        call.on('mutedByOthers', () => {
+            console.log(`***mutedByOthers event: You have been muted by other participant in this call`);
+        });
+
+
+        call.on('roleChanged', () => {
+            console.log(`***roleChanged changed: ${call.role}`);
+        });
+
+        call.on('transferorInfoChanged', () => {
+            console.log(`***transferorInfoChanged event fired.`);
+        });
+        transferorInfoChanged
+
+        call.on('isLocalVideoStartedChanged', () => {
+            console.log(`***isLocalVideoStarted changed: ${call.isLocalVideoStarted}`);
+        });
+
     } catch (error) {
         console.error(error);
     }
