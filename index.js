@@ -75,9 +75,6 @@ subscribeToCall = (call) => {
         call.on('idChanged', () => {
             console.log(`*** Call Id changed: ${call.id}`); 
         });
-
-        // Inspect the initial call.state value.
-        console.log(`*** Call state: ${call.state}`);
         // Subscribe to call's 'stateChanged' event for value changes.
         call.on('stateChanged', async () => {
             console.log(`***Call state changed: ${call.state}`);
@@ -104,7 +101,6 @@ subscribeToCall = (call) => {
         call.on('isLocalVideoStartedChanged', () => {
             console.log(`***isLocalVideoStarted changed: ${call.isLocalVideoStarted}`);
         });
-        console.log(`***isLocalVideoStarted: ${call.isLocalVideoStarted}`);
         call.localVideoStreams.forEach(async (lvs) => {
             localVideoStream = lvs;
             await displayLocalVideoStream();
