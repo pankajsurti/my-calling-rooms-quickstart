@@ -70,10 +70,10 @@ startCallButton.onclick = async () => {
 subscribeToCall = (call) => {
     try {
         // Inspect the initial call.id value.
-        console.log(`*** Call Id: ${call.id}`);
-        console.log(`*** Caller info: ${call.callerInfo.identifier.communicationUserId}`);
-        console.log(`*** Call direction: ${call.direction}`);
-        console.log(`*** Call Role: ${call.role}`);
+        console.log(`*** Call Id: ${call?.id}`);
+        console.log(`*** Caller info: ${call.callerInfo?.identifier}`);
+        console.log(`*** Call direction: ${call?.direction}`);
+        console.log(`*** Call Role: ${call?.role}`);
         
 
         //Subscribe to call's 'idChanged' event for value changes.
