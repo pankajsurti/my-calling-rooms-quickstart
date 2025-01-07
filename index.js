@@ -132,6 +132,7 @@ subscribeToCall = (call) => {
 
         call.on('totalParticipantCountChanged', () => {
             console.log(`***totalParticipantCountChanged event: ${call.totalParticipantCount}`);
+            console.log(`***call.remoteParticipants: ${call.remoteParticipants}`);
 
             call.remoteParticipants.forEach(remoteParticipant => {
                 console.log(`***inside forEach loop (totalParticipantCountChanged) to call subscribeToRemoteParticipant for each participant.`);
