@@ -212,6 +212,7 @@ subscribeToRemoteParticipant = (remoteParticipant) => {
  * you can choose to destroy the whole 'Renderer', a specific 'RendererView' or keep them, but this will result in displaying blank video frame.
  */
 subscribeToRemoteVideoStream = async (remoteVideoStream) => {
+    console.log(`***inside subscribeToRemoteVideoStream`);
     let renderer = new VideoStreamRenderer(remoteVideoStream);
     let view;
     let remoteVideoContainer = document.createElement('div');
@@ -222,8 +223,12 @@ subscribeToRemoteVideoStream = async (remoteVideoStream) => {
         view = await renderer.createView();
         // Attach the renderer view to the UI.
         remoteVideoContainer.appendChild(view.target);
-        console.log(`***remoteVideosGallery.appendChild(remoteVideoContainer); is CALLED inside subscribeToRemoteVideoStream`);
-        remoteVideosGallery.appendChild(remoteVideoContainer);
+        // Append the remote video container to the remote videos gallery.
+        if (!remoteVideosGallery.hasChildNodes())
+        {
+            console.log(`***remoteVideosGallery.appendChild(remoteVideoContainer); is CALLED inside subscribeToRemoteVideoStream`);
+            remoteVideosGallery.appendChild(remoteVideoContainer);
+        }
     }
 
     // Remote participant has switched video on/off
