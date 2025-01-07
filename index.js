@@ -162,7 +162,7 @@ subscribeToCall = (call) => {
         call.on('transferorInfoChanged', () => {
             console.log(`***transferorInfoChanged event fired.`);
         });
-        transferorInfoChanged
+        
 
         call.on('isLocalVideoStartedChanged', () => {
             console.log(`***isLocalVideoStarted changed: ${call.isLocalVideoStarted}`);
