@@ -159,9 +159,9 @@ subscribeToCall = (call) => {
             console.log(`***roleChanged changed: ${call.role}`);
         });
 
-        call.on('transferorInfoChanged', () => {
-            console.log(`***transferorInfoChanged event fired.`);
-        });
+        // call.on('transferorInfoChanged', () => {
+        //     console.log(`***transferorInfoChanged event fired.`);
+        // });
         
 
         call.on('isLocalVideoStartedChanged', () => {
