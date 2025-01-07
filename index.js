@@ -143,9 +143,7 @@ subscribeToCall = (call) => {
         call.on('remoteAudioStreamsUpdated', () => {
             console.log(`***remoteAudioStreamsUpdated event fired.`);
         });
-        call.on('remoteAudioStreamsUpdated', () => {
-            console.log(`***remoteAudioStreamsUpdated event fired.`);
-        });
+
         call.on('mutedByOthers', () => {
             console.log(`***mutedByOthers event: You have been muted by other participant in this call`);
         });
@@ -224,6 +222,7 @@ subscribeToRemoteVideoStream = async (remoteVideoStream) => {
         view = await renderer.createView();
         // Attach the renderer view to the UI.
         remoteVideoContainer.appendChild(view.target);
+        console.log(`***remoteVideosGallery.appendChild(remoteVideoContainer); is CALLED inside subscribeToRemoteVideoStream`);
         remoteVideosGallery.appendChild(remoteVideoContainer);
     }
 
