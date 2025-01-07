@@ -71,6 +71,11 @@ subscribeToCall = (call) => {
     try {
         // Inspect the initial call.id value.
         console.log(`*** Call Id: ${call.id}`);
+        console.log(`*** Caller info: ${call.callerInfo.identifier.communicationUserId}`);
+        console.log(`*** Call direction: ${call.direction}`);
+        console.log(`*** Call Role: ${call.role}`);
+        
+
         //Subscribe to call's 'idChanged' event for value changes.
         call.on('idChanged', () => {
             console.log(`*** Call Id changed: ${call.id}`); 
@@ -173,6 +178,7 @@ subscribeToCall = (call) => {
  */
 subscribeToRemoteParticipant = (remoteParticipant) => {
     try {
+        console.log(`*** inside subscribeToRemoteParticipant`);
         // Inspect the initial remoteParticipant.state value.
         console.log(`*** Remote participant state: ${remoteParticipant.state}`);
         // Subscribe to remoteParticipant's 'stateChanged' event for value changes.
@@ -191,15 +197,19 @@ subscribeToRemoteParticipant = (remoteParticipant) => {
         // Subscribe to the remoteParticipant's 'videoStreamsUpdated' event to be
         // notified when the remoteParticiapant adds new videoStreams and removes video streams.
         remoteParticipant.on('videoStreamsUpdated', e => {
+            console.log(`***remoteParticipant videoStreamsUpdated event fired.`);
             // Subscribe to new remote participant's video streams that were added.
             e.added.forEach(remoteVideoStream => {
+                console.log('*** Remote participant video stream was added.');
                 subscribeToRemoteVideoStream(remoteVideoStream)
             });
             // Unsubscribe from remote participant's video streams that were removed.
             e.removed.forEach(remoteVideoStream => {
                 console.log('*** Remote participant video stream was removed.');
             })
+            console.log(`***remoteParticipant videoStreamsUpdated event fired. END`);
         });
+        console.log(`*** outside subscribeToRemoteParticipant`);
     } catch (error) {
         console.error(error);
     }
@@ -230,11 +240,13 @@ subscribeToRemoteVideoStream = async (remoteVideoStream) => {
 
     // Remote participant has switched video on/off
     remoteVideoStream.on('isAvailableChanged', async () => {
+        console.log(`***remoteVideoStream.isAvailableChanged event fired.`);
         try {
             if (remoteVideoStream.isAvailable) {
                 await createView();
             } else {
                 view.dispose();
+                console.log(`***remoteVideosGallery.removeChild(remoteVideoContainer); is CALLED inside subscribeToRemoteVideoStream`);
                 remoteVideosGallery.removeChild(remoteVideoContainer);
             }
         } catch (e) {
