@@ -117,7 +117,7 @@ subscribeToCall = (call) => {
 
         // Inspect the call's current remote participants and subscribe to them.
         call.remoteParticipants.forEach(remoteParticipant => {
-            console.log(`***inside forEach loop to call subscribeToRemoteParticipant for each participant.`);
+            console.log(`***inside forEach loop to call subscribeToCall for each participant.`);
             subscribeToRemoteParticipant(remoteParticipant);
         });
         // Subscribe to the call's 'remoteParticipantsUpdated' event to be
@@ -168,7 +168,7 @@ subscribeToCall = (call) => {
         });
 
     } catch (error) {
-        console.error(error);
+        console.error(`*** subscribeToCall error ${error}`);
     }
 }
 
@@ -211,7 +211,7 @@ subscribeToRemoteParticipant = (remoteParticipant) => {
         });
         console.log(`*** outside subscribeToRemoteParticipant`);
     } catch (error) {
-        console.error(error);
+        console.error(`*** subscribeToRemoteParticipant error ${error}`);
     }
 }
 
