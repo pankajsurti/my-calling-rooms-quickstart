@@ -149,9 +149,10 @@ subscribeToCall = (call) => {
             console.log(`***remoteAudioStreamsUpdated event fired.`);
         });
 
-        call.on('mutedByOthers', () => {
-            console.log(`***mutedByOthers event: You have been muted by other participant in this call`);
-        });
+        // //subscribeToCall error CallingCommunicationError: Not able to subscribe to event mutedByOthers, unknown event name
+        // call.on('mutedByOthers', () => {
+        //     console.log(`***mutedByOthers event: You have been muted by other participant in this call`);
+        // });
 
 
         call.on('roleChanged', () => {
